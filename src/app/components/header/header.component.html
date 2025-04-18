@@ -1,0 +1,27 @@
+<nav class="flex">
+  <div class="flex">
+    <lucide-angular [img]="MenuIcon" />
+    <img
+      src="assets/images/logo.png"
+      alt="goodo logo"
+      class="h-[75px] w-[77px]"
+    />
+    <span>Goodo</span>
+  </div>
+
+  <div class="flex-1">
+    <input type="text" placeholder="Search todo" />
+  </div>
+
+  <div class="flex">
+    <span>Sort by</span>
+    <select>
+      <option value=""></option>
+    </select>
+    <lucide-icon [img]="ArrowDownWideNarrow"></lucide-icon>
+  </div>
+
+  <div>
+    <lucide-icon [img]="Bell"></lucide-icon>
+  </div>
+</nav>
