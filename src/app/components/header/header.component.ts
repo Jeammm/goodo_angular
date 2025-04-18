@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { LucideAngularModule, Menu, ArrowDownWideNarrow, Bell } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  Menu,
+  ArrowDownWideNarrow,
+  Bell,
+  Search,
+} from 'lucide-angular';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +15,7 @@ import { LucideAngularModule, Menu, ArrowDownWideNarrow, Bell } from 'lucide-ang
 })
 export class HeaderComponent {
   readonly MenuIcon = Menu;
-  readonly ArrowDownWideNarrow = ArrowDownWideNarrow
-  readonly Bell = Bell
+  readonly ArrowDownWideNarrow = ArrowDownWideNarrow;
+  readonly Bell = Bell;
+  readonly Search = Search;
 }

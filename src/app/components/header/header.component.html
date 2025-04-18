@@ -1,27 +1,31 @@
-<nav class="flex">
-  <div class="flex">
-    <lucide-angular [img]="MenuIcon" />
+<nav class="flex items-center pt-7 px-8">
+  <button>
+    <lucide-angular [img]="MenuIcon" size="33" />
+  </button>
+
+  <div class="flex items-center gap-2 mx-12.5">
     <img
       src="assets/images/logo.png"
       alt="goodo logo"
       class="h-[75px] w-[77px]"
     />
-    <span>Goodo</span>
+    <span class="text-5xl text-[#515153]">Goodo</span>
   </div>
 
-  <div class="flex-1">
-    <input type="text" placeholder="Search todo" />
+  <div
+    class="flex-1 flex border border-[#F6F6F6] rounded-[40px] px-[27px] py-[19px] gap-4 shadow-md"
+  >
+    <label for="search-todo"><lucide-angular [img]="Search" size="33" /></label>
+    <input id="search-todo" type="text" placeholder="Search todo" />
   </div>
 
-  <div class="flex">
-    <span>Sort by</span>
-    <select>
-      <option value=""></option>
+  <div class="flex ml-4 gap-2">
+    <span class="text-[#707070]">Sort by</span>
+    <select value="Priority">
+      <option value="Priority">Priority</option>
     </select>
-    <lucide-icon [img]="ArrowDownWideNarrow"></lucide-icon>
+    <lucide-icon [img]="ArrowDownWideNarrow" class="ml-1" />
   </div>
 
-  <div>
-    <lucide-icon [img]="Bell"></lucide-icon>
-  </div>
+  <lucide-icon [img]="Bell" class="ml-4"></lucide-icon>
 </nav>
