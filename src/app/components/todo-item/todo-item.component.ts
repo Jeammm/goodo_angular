@@ -1,7 +1,13 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Todo } from '../../model/class/todo';
-import { LucideAngularModule, Star } from 'lucide-angular';
+import {
+  ChevronRight,
+  LucideAngularModule,
+  Star,
+  FileEdit,
+} from 'lucide-angular';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TodoService } from '../../services/todo.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -12,5 +18,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class TodoItemComponent {
   todo = input.required<Todo>();
   selected = input<boolean>(false);
+
+  todoService = inject(TodoService);
+
   readonly Star = Star;
+  readonly ChevronRight = ChevronRight;
+  readonly FileEdit = FileEdit;
 }
