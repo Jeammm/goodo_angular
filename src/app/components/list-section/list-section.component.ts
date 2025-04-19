@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../model/class/todo';
@@ -16,6 +16,19 @@ export class ListSectionComponent implements OnInit {
 
   todoService = inject(TodoService);
   todoList = signal<Todo[]>([]);
+
+  filteredTodoList = computed(() =>
+    this.todoList().filter((t) => {
+      return (
+        t.name
+          .toLowerCase()
+          .includes(this.todoService.search().toLowerCase()) ||
+        t.description
+          .toLowerCase()
+          .includes(this.todoService.search().toLowerCase())
+      );
+    })
+  );
 
   constructor(private route: ActivatedRoute) {
     this.route.data.subscribe((data) => {

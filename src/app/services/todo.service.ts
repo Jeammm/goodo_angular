@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { mockTodos } from '../model/class/todo';
 import { Todo } from '../model/class/todo'; // make sure to import the type
@@ -8,6 +8,14 @@ import { Todo } from '../model/class/todo'; // make sure to import the type
 })
 export class TodoService {
   constructor() {}
+
+  search = signal<string>('');
+  sort = signal<string>('priority');
+  order = signal<string>('desc');
+
+  onChangeSearch(q: string) {
+    this.search.set(q);
+  }
 
   getActiveTodo(): Observable<Todo[]> {
     return of(mockTodos.filter((t) => !t.completed));

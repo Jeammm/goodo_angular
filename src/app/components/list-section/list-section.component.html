@@ -4,7 +4,7 @@
       {{ sectionType() | titlecase }} list
     </h3>
     <div class="flex flex-col gap-2.5">
-      @for (todo of todoList(); track todo.id) {
+      @for (todo of filteredTodoList(); track todo.id) {
       <app-todo-item [todo]="todo" />
       }
     </div>

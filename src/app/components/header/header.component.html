@@ -13,18 +13,37 @@
   </div>
 
   <div
-    class="flex-1 flex border border-[#F6F6F6] rounded-[40px] px-[27px] py-[19px] gap-4 shadow-md"
+    class="flex-1 items-center flex border border-[#F6F6F6] hover:bg-[#efefef] rounded-[40px] px-[27px] gap-4 shadow-md bg-[#F8F8F8]"
   >
     <label for="search-todo"><lucide-angular [img]="Search" size="33" /></label>
-    <input id="search-todo" type="text" placeholder="Search todo" />
+    <input
+      id="search-todo"
+      type="text"
+      placeholder="Search todo"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="handleSearch(searchQuery)"
+      class="outline-none py-4 w-full placeholder:text-[#707070] text-lg"
+    />
   </div>
 
-  <div class="flex ml-4 gap-2">
+  <div class="flex ml-4 gap-2 items-center">
     <span class="text-[#707070]">Sort by</span>
-    <select value="Priority">
-      <option value="Priority">Priority</option>
-    </select>
-    <lucide-icon [img]="ArrowDownWideNarrow" class="ml-1" />
+    <app-big-select
+      placeholder="Sort by"
+      [options]="sortByOptions"
+      [selected]="sortBy()"
+      (onSelect)="onSelectSortBy($event)"
+    />
+    <button
+      (click)="onToggleOrderBy()"
+      class="cursor-pointer flex items-center"
+    >
+      @if (orderBy() === "desc") {
+      <lucide-icon [img]="ArrowDownWideNarrow" class="ml-1" />
+      } @else {
+      <lucide-icon [img]="ArrowUpWideNarrow" class="ml-1" />
+      }
+    </button>
   </div>
 
   <lucide-icon [img]="Bell" class="ml-4"></lucide-icon>
