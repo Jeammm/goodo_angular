@@ -1,8 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PrimaryButtonComponent } from '../ui/primary-button/primary-button.component';
 import { SideMenuLinkButtonComponent } from '../ui/side-menu-link-button/side-menu-link-button.component';
-import { CheckSquare, Hourglass, ListCheck, Star } from 'lucide-angular';
+import {
+  CheckSquare,
+  Hourglass,
+  ListCheck,
+  Settings,
+  Star,
+} from 'lucide-angular';
+import { TodoService } from '../../services/todo.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -15,4 +22,7 @@ export class SideMenuComponent {
   readonly ListCheck = ListCheck;
   readonly Glasshour = Hourglass;
   readonly Checked = CheckSquare;
+  readonly Settings = Settings;
+
+  todoService = inject(TodoService)
 }

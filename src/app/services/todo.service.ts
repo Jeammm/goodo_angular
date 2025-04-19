@@ -54,4 +54,10 @@ export class TodoService {
   ): Observable<Todo | undefined> {
     return of(mockTodos.find((todo) => todo.id === todoId));
   }
+
+  menuCollapsed = signal<boolean>(false);
+
+  toggleMenuCollapsed() {
+    this.menuCollapsed.update((c) => !c);
+  }
 }

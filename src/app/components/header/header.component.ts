@@ -54,4 +54,8 @@ export class HeaderComponent {
   onToggleOrderBy() {
     this.orderBy.update((o) => (o === 'desc' ? 'acs' : 'desc'));
   }
+
+  onToggleMenuCollapse() {
+    this.todoService.toggleMenuCollapsed();
+  }
 }

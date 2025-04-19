@@ -1,7 +1,10 @@
 <app-header />
 <main class="p-6">
   <div class="flex">
-    <app-side-menu class="flex-1 max-w-[374px]" />
+    <app-side-menu
+      class=""
+      [class]="todoService.menuCollapsed() ? '' : 'flex-1 max-w-[374px]'"
+    />
     <div class="flex-1">
       <router-outlet />
     </div>

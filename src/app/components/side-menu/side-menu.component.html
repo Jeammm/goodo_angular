@@ -1,3 +1,4 @@
+@if (!todoService.menuCollapsed()) {
 <div class="bg-[#F4F4F4] rounded-2xl px-[25px] pt-[32px] pb-[25px]">
   <h3 class="text-4xl mb-6 text-[#515153]">Menu</h3>
   <a routerLink="/todo/active/new">
@@ -47,5 +48,43 @@
     />
   </div>
 
-  <app-side-menu-link-button linkTo="/setting" linkText="Setting" />
+  <app-side-menu-link-button
+    linkTo="/setting"
+    linkText="Setting"
+    [icon]="Settings"
+  />
 </div>
+} @else {
+<div class="bg-[#F4F4F4] rounded-2xl px-[25px] pt-[32px] pb-[25px]">
+  <h3 class="text-4xl mb-6 text-[#515153]">‎</h3>
+  <a routerLink="/todo/active/new">
+    <app-primary-button btnText="+"/>
+  </a>
+  <div class="flex flex-col gap-1.5 mt-5.5">
+    <app-side-menu-link-button linkTo="/todo/active" [icon]="ListCheck" />
+    <app-side-menu-link-button linkTo="/todo/soon" [icon]="Glasshour" />
+    <app-side-menu-link-button linkTo="/todo/important" [icon]="Star" />
+    <app-side-menu-link-button linkTo="/todo/completed" [icon]="Checked" />
+  </div>
+
+  <div class="border-b mx-2 mt-5 mb-4.5"></div>
+
+  <p class="text-[#707070] mx-2 mb-3 text-sm">‎</p>
+  <div class="flex flex-col gap-1.5">
+    <app-side-menu-link-button
+      [query]="{ tag: 'ske-head-work' }"
+      dotColor="#70CA88"
+    />
+    <app-side-menu-link-button
+      [query]="{ tag: 'cpsk-work' }"
+      dotColor="#ECCD72"
+    />
+    <app-side-menu-link-button
+      [query]="{ tag: 'gdsc-work' }"
+      dotColor="#EA6C64"
+    />
+  </div>
+
+  <app-side-menu-link-button linkTo="/setting" [icon]="Settings" />
+</div>
+}

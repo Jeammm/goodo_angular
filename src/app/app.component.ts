@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { TodoService } from './services/todo.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,6 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
   templateUrl: './app.component.html',
   styles: [],
 })
-export class AppComponent {}
+export class AppComponent {
+  todoService = inject(TodoService)
+}
