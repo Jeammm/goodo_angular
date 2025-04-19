@@ -5,6 +5,10 @@
   routerLinkActive="bg-[#F4F4F4] text-black"
 >
   <input type="checkbox" class="scale-150 accent-[#e4e4e4]" />
-  <lucide-angular [img]="Star" class="mx-2.5 fill-yellow-500" />
+  <lucide-angular
+    [img]="Star"
+    class="mx-2.5"
+    [class]="todo().favourite ? 'fill-yellow-500' : ''"
+  />
   <p class="line-clamp-1">{{ todo().name }}</p>
 </div>

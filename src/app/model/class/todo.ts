@@ -76,7 +76,7 @@ export const mockTodos: Todo[] = [
     useTime: false,
     dueDate: '2025-04-23',
     timeMode: 'allDay',
-    repeat: 'always',
+    repeat:'always',
     completed: true,
   },
   {

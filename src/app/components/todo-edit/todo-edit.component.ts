@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Todo } from '../../model/class/todo';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { LucideAngularModule, Save, Star, X, XCircle } from 'lucide-angular';
 import { TagComponent } from '../ui/tag/tag.component';
 import { DatePipe } from '@angular/common';
@@ -12,6 +12,7 @@ import {
   ButtonGroupComponent,
   ButtonGroupOption,
 } from '../ui/button-group/button-group.component';
+import { TodoService } from '../../services/todo.service';
 
 @Component({
   selector: 'app-todo-edit',
@@ -29,13 +30,32 @@ import {
   templateUrl: './todo-edit.component.html',
   styles: ``,
 })
-export class TodoEditComponent {
+export class TodoEditComponent implements OnInit {
+  todoService = inject(TodoService);
+  todoId: string | null = null;
+
   todoData: Todo = new Todo();
 
   readonly Star = Star;
   readonly X = X;
   readonly Save = Save;
   readonly Cancel = XCircle;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.todoId = params.get('todoId');
+
+      if (this.todoId !== null) {
+        this.todoService.getTodoById(Number(this.todoId)).subscribe((res) => {
+          if (res) {
+            this.todoData = res;
+          }
+        });
+      }
+    });
+  }
 
   readonly priorityOption: SelectOption[] = [
     {

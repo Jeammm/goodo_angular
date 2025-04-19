@@ -4,6 +4,6 @@
   [required]="required()"
   class="w-full border border-[#E4E4E4] rounded-lg px-4 py-2"
   [class]="disabled() ? 'bg-[#eee]' : 'bg-white'"
-  [value]="value"
+  [value]="value?.split('T')?.[0]"
   (input)="onInputChange($event)"
 />
