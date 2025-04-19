@@ -1,30 +1,34 @@
 import { Routes } from '@angular/router';
 import { ListSectionComponent } from './components/list-section/list-section.component';
+import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
+import { TodoEditComponent } from './components/todo-edit/todo-edit.component';
+
+const sectionTypes = ['active', 'soon', 'important', 'completed'];
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'active',
+    redirectTo: 'todo',
   },
   {
-    path: 'active',
-    loadComponent: () => ListSectionComponent,
-    data: { sectionType: 'active' },
-  },
-  {
-    path: 'soon',
-    loadComponent: () => ListSectionComponent,
-    data: { sectionType: 'soon' },
-  },
-  {
-    path: 'important',
-    loadComponent: () => ListSectionComponent,
-    data: { sectionType: 'important' },
-  },
-  {
-    path: 'completed',
-    loadComponent: () => ListSectionComponent,
-    data: { sectionType: 'completed' },
+    path: 'todo',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'active',
+      },
+      ...sectionTypes.map((type) => ({
+        path: type,
+        loadComponent: () => ListSectionComponent,
+        data: { sectionType: type },
+        children: [
+          { path: 'new', loadComponent: () => TodoEditComponent },
+          { path: ':todoId', loadComponent: () => TodoDetailComponent },
+          { path: ':todoId/edit', loadComponent: () => TodoEditComponent },
+        ],
+      })),
+    ],
   },
 ];

@@ -1,30 +1,49 @@
-<div
-  class="max-w-[374px] bg-[#F4F4F4] rounded-2xl px-[25px] pt-[32px] pb-[25px]"
->
+<div class="bg-[#F4F4F4] rounded-2xl px-[25px] pt-[32px] pb-[25px]">
   <h3 class="text-4xl mb-6 text-[#515153]">Menu</h3>
-  <app-primary-button btnText="+ Add a new todo" />
+  <a routerLink="/todo/active/new">
+    <app-primary-button btnText="+ Add a new todo" />
+  </a>
   <div class="flex flex-col gap-1.5 mt-5.5">
-    <app-side-menu-link-button linkTo="/active" linkText="Active list" />
-    <app-side-menu-link-button linkTo="/soon" linkText="Due soon" />
-    <app-side-menu-link-button linkTo="/important" linkText="Important" />
-    <app-side-menu-link-button linkTo="/completed" linkText="Completed" />
+    <app-side-menu-link-button
+      linkTo="/todo/active"
+      linkText="Active list"
+      [icon]="ListCheck"
+    />
+    <app-side-menu-link-button
+      linkTo="/todo/soon"
+      linkText="Due soon"
+      [icon]="Glasshour"
+    />
+    <app-side-menu-link-button
+      linkTo="/todo/important"
+      linkText="Important"
+      [icon]="Star"
+    />
+    <app-side-menu-link-button
+      linkTo="/todo/completed"
+      linkText="Completed"
+      [icon]="Checked"
+    />
   </div>
 
   <div class="border-b mx-2 mt-5 mb-4.5"></div>
 
-  <p class="text-[#707070] mx-2 mb-1">Categories</p>
+  <p class="text-[#707070] mx-2 mb-3 text-sm">Categories</p>
   <div class="flex flex-col gap-1.5">
     <app-side-menu-link-button
       [query]="{ tag: 'ske-head-work' }"
       linkText="SKE head work"
+      dotColor="#70CA88"
     />
     <app-side-menu-link-button
       [query]="{ tag: 'cpsk-work' }"
       linkText="CPSK work"
+      dotColor="#ECCD72"
     />
     <app-side-menu-link-button
       [query]="{ tag: 'gdsc-work' }"
       linkText="GDSC work"
+      dotColor="#EA6C64"
     />
   </div>
 

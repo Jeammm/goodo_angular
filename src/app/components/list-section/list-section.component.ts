@@ -1,29 +1,30 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../model/class/todo';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, TitleCasePipe } from '@angular/common';
+import { TodoItemComponent } from '../todo-item/todo-item.component';
 
 @Component({
   selector: 'app-list-section',
-  imports: [JsonPipe],
+  imports: [TitleCasePipe, TodoItemComponent, RouterModule],
   templateUrl: './list-section.component.html',
   styles: ``,
 })
 export class ListSectionComponent implements OnInit {
-  sectionType: string | null = null;
+  sectionType = signal<string | null>(null);
 
   todoService = inject(TodoService);
   todoList = signal<Todo[]>([]);
 
   constructor(private route: ActivatedRoute) {
     this.route.data.subscribe((data) => {
-      this.sectionType = data['sectionType'];
+      this.sectionType.set(data['sectionType']);
     });
   }
 
   ngOnInit(): void {
-    switch (this.sectionType) {
+    switch (this.sectionType()) {
       case 'active':
         this.todoService
           .getActiveTodo()

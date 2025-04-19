@@ -1,0 +1,10 @@
+<div
+  class="flex px-9 py-5 border border-[#E4E4E4] rounded-lg items-center hover:bg-[#F4F4F4] cursor-pointer text-[#707070]"
+  [class]="selected() ? 'text-black' : ''"
+  [routerLink]="todo().id.toString()"
+  routerLinkActive="bg-[#F4F4F4] text-black"
+>
+  <input type="checkbox" class="scale-150 accent-[#e4e4e4]" />
+  <lucide-angular [img]="Star" class="mx-2.5 fill-yellow-500" />
+  <p class="line-clamp-1">{{ todo().name }}</p>
+</div>

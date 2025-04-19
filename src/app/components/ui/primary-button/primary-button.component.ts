@@ -4,14 +4,14 @@ import { Component, input, output } from '@angular/core';
   selector: 'app-primary-button',
   imports: [],
   templateUrl: './primary-button.component.html',
-  styles: ``
+  styles: ``,
 })
 export class PrimaryButtonComponent {
-  btnText = input<string>("")
+  btnText = input<string>('');
 
-  btnClicked = output()
+  btnClicked = output();
 
-  onClick () {
-    
+  onClick() {
+    this.btnClicked.emit();
   }
 }

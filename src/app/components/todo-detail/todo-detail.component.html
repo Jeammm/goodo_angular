@@ -1,0 +1,79 @@
+<div
+  class="ml-5 w-[500px] flex flex-col bg-[#F4F4F4] rounded-lg h-full pt-16 pl-13.5 pr-11 relative text-[#707070]"
+>
+  <button class="absolute top-0 right-3 cursor-pointer" [routerLink]="['../']">
+    <lucide-angular [img]="X" class="ml-5 mr-2.5" />
+  </button>
+
+  <div class="flex justify-between">
+    <h5 class="text-4xl text-[#515153]">
+      {{ todoData().name }}
+    </h5>
+    <lucide-angular [img]="Star" class="ml-5 mr-2.5 fill-yellow-500" />
+  </div>
+
+  <div class="my-2 py-3">
+    <p class="text-[#515153] mb-1">Description:</p>
+    <p>
+      {{ todoData().description }}
+    </p>
+  </div>
+
+  <div class="flex gap-3 my-2 items-center">
+    <p class="text-[#515153]">Tags:</p>
+    <div class="flex gap-2">
+      @for (tag of todoData().tags; track $index) {
+      <app-tag [text]="tag" />
+      }
+    </div>
+  </div>
+
+  <div class="flex gap-3 my-2">
+    <p class="text-[#515153]">Priority:</p>
+    <div>
+      {{ todoData().priority }}
+    </div>
+  </div>
+
+  <div class="flex gap-3 my-2">
+    <p class="text-[#515153]">Due date:</p>
+    <div>
+      {{ todoData().dueDate | date : "EEE, dd MMM YYYY" }}
+    </div>
+    <p class="text-[#515153]">Time:</p>
+    <div>
+      {{ todoData().dueDate | date : "HH:MM" }}
+    </div>
+  </div>
+
+  <div class="flex gap-3 my-2">
+    <p class="text-[#515153]">Repeat:</p>
+    <div>
+      {{ todoData().repeat ? "Repeat" : "Don't repeat" }}
+    </div>
+  </div>
+
+  <div class="flex justify-around gap-4 px-4 mt-auto mb-7">
+    <button
+      class="flex flex-col items-center gap-2 cursor-pointer hover:bg-[#e6e6e6] py-3 flex-1/2 rounded-md"
+      (click)="onClickComplete()"
+    >
+      <lucide-angular [img]="Check" size="32" [strokeWidth]="1.5" />
+      <span>Complete</span>
+    </button>
+    <button
+      class="flex flex-col items-center gap-2 cursor-pointer hover:bg-[#e6e6e6] py-3 flex-1/2 rounded-md"
+      routerLink="edit"
+    >
+      <lucide-angular [img]="Edit" size="32" [strokeWidth]="1.5" />
+      <span>Edit</span>
+    </button>
+    <button
+      class="flex flex-col items-center gap-2 cursor-pointer hover:bg-[#e6e6e6] py-3 flex-1/2 rounded-md"
+      (click)="onClickDelete()"
+    >
+      <lucide-angular [img]="Delete" size="32" [strokeWidth]="1.5" />
+      <span>Delete</span>
+    </button>
+  </div>
+</div>

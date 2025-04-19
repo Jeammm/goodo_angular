@@ -1,8 +1,20 @@
 <a [routerLink]="linkTo()" [queryParams]="query()">
   <button
-    class="w-full p-2 text-[#707070] cursor-pointer rounded-lg text-start hover:bg-[#EBEBEB]"
+    class="w-full p-2 text-[#707070] cursor-pointer rounded-lg text-start hover:bg-[#EBEBEB] flex gap-2 items-center"
     routerLinkActive="text-black bg-[#EBEBEB]"
   >
-    {{ linkText() }}
+    @if (icon()) {
+    <lucide-angular [img]="icon()" size="18" />
+    } @if (dotColor()) {
+    <lucide-angular
+      [img]="Circle"
+      size="15"
+      [strokeWidth]="3"
+      [class]="dotFill()"
+    />
+    }
+    <span>
+      {{ linkText() }}
+    </span>
   </button>
 </a>

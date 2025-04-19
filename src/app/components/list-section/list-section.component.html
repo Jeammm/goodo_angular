@@ -1,3 +1,13 @@
-<div>
-  {{ todoList() | json }}
+<div class="ml-5 flex h-full">
+  <div class="flex-1">
+    <h3 class="text-5xl text-[#515153] pl-12 pt-9 pb-10">
+      {{ sectionType() | titlecase }} list
+    </h3>
+    <div class="flex flex-col gap-2.5">
+      @for (todo of todoList(); track todo.id) {
+      <app-todo-item [todo]="todo" />
+      }
+    </div>
+  </div>
+  <router-outlet />
 </div>

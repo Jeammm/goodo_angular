@@ -1,0 +1,9 @@
+<div
+  (click)="tagClickHandler()"
+  class="flex gap-2 border rounded-3xl bg-[#EDEDED] border-[#CCCCCC] px-4 py-0.5 text-[#707070]"
+>
+  <span>{{ text() }}</span>
+  @if (clickable()) {
+  <lucide-angular [img]="X" />
+  }
+</div>
