@@ -1,0 +1,18 @@
+<div
+  class="border border-[#E4E4E4] rounded-lg py-2"
+  [class]="disabled() ? 'bg-[#EBEBEB]' : 'bg-white'"
+>
+  @for (item of buttonGroupItems(); track item.id) {
+  <button
+    (click)="onClickHandler(item)"
+    class="not-last:border-r px-1 cursor-pointer"
+  >
+    <p
+      class="px-1 mx-1 rounded-sm"
+      [class]="selectedItem() === item.id ? 'bg-[#efefef]' : ''"
+    >
+      {{ item.label }}
+    </p>
+  </button>
+  }
+</div>

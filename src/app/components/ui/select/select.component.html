@@ -1,0 +1,30 @@
+<div
+  class="relative flex-1 border border-[#E4E4E4] rounded-lg p-2 hover:bg-[#efefef]"
+  [class]="disabled() ? 'bg-[#eee]' : 'bg-white'"
+  (click)="toggleOpen()"
+>
+  <div class="flex justify-between">
+    @if (selectedLabel()) {
+    <p>{{ selectedLabel() }}</p>
+    } @else {
+    <p class="text-[#A3A3A3]">{{ placeholder() }}</p>
+    }
+    <lucide-angular [img]="ChevronRight" />
+  </div>
+
+  @if (isDropDownOpen()) {
+  <div
+    class="fixed w-screen h-screen top-0 left-0 z-10"
+    (click)="$event.stopPropagation(); toggleOpen()"
+  ></div>
+  <div
+    class="z-100 absolute w-full translate-y-2 -translate-x-2 bg-white border border-[#E4E4E4] rounded-b-lg p-2 cursor-pointer"
+  >
+    @for (option of options(); track option.id) {
+    <div (click)="onOptionClick(option)" class="px-2 py-1 hover:bg-[#efefef]">
+      {{ option.label }}
+    </div>
+    }
+  </div>
+  }
+</div>

@@ -1,72 +1,137 @@
 <div
   class="ml-5 w-[500px] flex flex-col bg-[#F4F4F4] rounded-lg h-full pt-16 pl-13.5 pr-11 relative text-[#707070]"
 >
-  <button class="absolute top-0 right-3 cursor-pointer" [routerLink]="['../']">
-    <lucide-angular [img]="X" class="ml-5 mr-2.5" />
-  </button>
-
-  <div class="flex justify-between">
-    <h5 class="text-4xl text-[#515153]">
-      {{ todoData().name }}
-    </h5>
-    <lucide-angular [img]="Star" class="ml-5 mr-2.5 fill-yellow-500" />
-  </div>
-
-  <div class="my-2 py-3">
-    <p class="text-[#515153] mb-1">Description:</p>
-    <p>
-      {{ todoData().description }}
-    </p>
-  </div>
-
-  <div class="flex gap-3 my-2 items-center">
-    <p class="text-[#515153]">Tags:</p>
-    <div class="flex gap-2">
-      @for (tag of todoData().tags; track $index) {
-      <app-tag [text]="tag" />
-      }
-    </div>
-  </div>
-
-  <div class="flex gap-3 my-2">
-    <p class="text-[#515153]">Priority:</p>
-    <div>
-      {{ todoData().priority }}
-    </div>
-  </div>
-
-  <div class="flex gap-3 my-2">
-    <p class="text-[#515153]">Due date:</p>
-    <div>
-      {{ todoData().dueDate | date : "EEE, dd MMM YYYY" }}
-    </div>
-    <p class="text-[#515153]">Time:</p>
-    <div>
-      {{ todoData().dueDate | date : "HH:MM" }}
-    </div>
-  </div>
-
-  <div class="flex gap-3 my-2">
-    <p class="text-[#515153]">Repeat:</p>
-    <div>
-      {{ todoData().repeat ? "Repeat" : "Don't repeat" }}
-    </div>
-  </div>
-
-  <div class="flex justify-around gap-4 px-4 mt-auto mb-7">
+  <form #form="ngForm">
     <button
-      class="flex flex-col items-center gap-2 cursor-pointer hover:bg-[#e6e6e6] py-3 flex-1/2 rounded-md"
-      routerLink="../"
+      class="absolute top-0 right-3 cursor-pointer"
+      [routerLink]="['../']"
     >
-      <lucide-angular [img]="Cancel" size="32" [strokeWidth]="1.5" />
-      <span>Cancel</span>
+      <lucide-angular [img]="X" class="ml-5 mr-2.5" />
     </button>
-    <button
-      class="flex flex-col items-center gap-2 cursor-pointer hover:bg-[#e6e6e6] py-3 flex-1/2 rounded-md"
-      (click)="onClickSave()"
-    >
-      <lucide-angular [img]="Save" size="32" [strokeWidth]="1.5" />
-      <span>Save</span>
-    </button>
-  </div>
+
+    <div class="flex justify-between gap-4">
+      <input
+        type="text"
+        #name="ngModel"
+        required
+        class="text-4xl text-[#515153] border-b"
+        [(ngModel)]="todoData.name"
+        name="name"
+        placeholder="Todo name"
+      />
+      <button class="cursor-pointer group" (click)="onToggleFavourite()">
+        <lucide-angular
+          [img]="Star"
+          [class]="
+            todoData.favourite
+              ? 'fill-yellow-500'
+              : 'group-hover:fill-yellow-500/30'
+          "
+        />
+      </button>
+    </div>
+
+    <div class="my-2 py-3">
+      <p class="text-[#515153] mb-1">Description:</p>
+      <textarea
+        type="text"
+        #description="ngModel"
+        placeholder="write your description..."
+        class="p-3 w-full bg-white border border-[#E4E4E4] rounded-lg resize-none h-[140px]"
+        [(ngModel)]="todoData.description"
+        name="description"
+      >
+      </textarea>
+    </div>
+
+    <div class="flex gap-3 my-2 items-center">
+      <p class="text-[#515153]">Tags:</p>
+      <div class="flex gap-2">
+        @for (tag of todoData.tags; track $index) {
+        <app-tag [text]="tag" />
+        }
+      </div>
+    </div>
+
+    <div class="flex gap-3 my-2 items-center">
+      <p class="text-[#515153]">Priority:</p>
+      <app-select
+        class="flex-1"
+        [options]="priorityOption"
+        placeholder="select priority"
+        [selected]="todoData.priority"
+        (onSelect)="onSelectPriority($event)"
+      />
+    </div>
+
+    <div class="flex gap-3 my-2">
+      <input
+        type="checkbox"
+        #useTime="ngModel"
+        required
+        class="text-4xl text-[#515153] border-b scale-150 accent-[#e4e4e4]"
+        [(ngModel)]="todoData.useTime"
+        name="useTime"
+      />
+      <p class="text-[#515153]">Time</p>
+    </div>
+
+    <div class="ml-20">
+      <div class="flex gap-3 my-2 items-center">
+        <p class="text-[#515153]">Due date:</p>
+        <app-date-picker
+          [(ngModel)]="todoData.dueDate"
+          name="dueDate"
+          [required]="true"
+          class="flex-1"
+          [disabled]="!todoData.useTime"
+        />
+      </div>
+
+      <div class="flex gap-3 my-2 items-center">
+        <app-button-group
+          [buttonGroupItems]="timeModeOptions"
+          (onButtonClick)="onClickTimeMode($event)"
+          [selectedItem]="todoData.timeMode"
+          [disabled]="!todoData.useTime"
+        />
+        <app-time-picker
+          [(ngModel)]="todoData.dueDate"
+          name="dueDate"
+          [required]="true"
+          class="flex-1"
+          [disabled]="!todoData.useTime || todoData.timeMode === 'all-day'"
+        />
+      </div>
+
+      <div class="flex gap-3 my-2 items-center">
+        <p class="text-[#515153]">Repeat:</p>
+        <app-select
+          class="flex-1"
+          [options]="repeatOption"
+          placeholder="select repeat"
+          [selected]="todoData.repeat"
+          (onSelect)="onSelectRepeat($event)"
+          [disabled]="!todoData.useTime"
+        />
+      </div>
+    </div>
+
+    <div class="flex justify-around gap-4 px-4 mt-10 mb-7">
+      <button
+        class="flex flex-col items-center gap-2 cursor-pointer hover:bg-[#e6e6e6] py-3 flex-1/2 rounded-md"
+        routerLink="../"
+      >
+        <lucide-angular [img]="Cancel" size="32" [strokeWidth]="1.5" />
+        <span>Cancel</span>
+      </button>
+      <button
+        class="flex flex-col items-center gap-2 cursor-pointer hover:bg-[#e6e6e6] py-3 flex-1/2 rounded-md"
+        (click)="onClickSave()"
+      >
+        <lucide-angular [img]="Save" size="32" [strokeWidth]="1.5" />
+        <span>Save</span>
+      </button>
+    </div>
+  </form>
 </div>

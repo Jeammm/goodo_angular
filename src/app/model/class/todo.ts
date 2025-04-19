@@ -8,7 +8,7 @@ export class Todo {
   useTime: boolean;
   dueDate: string;
   timeMode: string;
-  repeat: boolean;
+  repeat: string;
   completed: boolean;
 
   constructor() {
@@ -17,11 +17,11 @@ export class Todo {
     this.description = '';
     this.favourite = false;
     this.tags = [];
-    this.priority = '';
-    this.useTime = false;
+    this.priority = 'high';
+    this.useTime = true;
     this.dueDate = '';
-    this.timeMode = '';
-    this.repeat = false;
+    this.timeMode = 'all-day';
+    this.repeat = 'no-repeat';
     this.completed = false;
   }
 }
@@ -37,7 +37,7 @@ export const mockTodos: Todo[] = [
     useTime: true,
     dueDate: '2025-04-20T15:00:00',
     timeMode: 'time',
-    repeat: false,
+    repeat: 'no-repeat',
     completed: false,
   },
   {
@@ -50,7 +50,7 @@ export const mockTodos: Todo[] = [
     useTime: false,
     dueDate: '2025-04-21',
     timeMode: 'allDay',
-    repeat: false,
+    repeat: 'no-repeat',
     completed: false,
   },
   {
@@ -63,7 +63,7 @@ export const mockTodos: Todo[] = [
     useTime: true,
     dueDate: '2025-04-22T20:00:00',
     timeMode: 'time',
-    repeat: false,
+    repeat: 'no-repeat',
     completed: false,
   },
   {
@@ -76,7 +76,7 @@ export const mockTodos: Todo[] = [
     useTime: false,
     dueDate: '2025-04-23',
     timeMode: 'allDay',
-    repeat: true,
+    repeat: 'always',
     completed: true,
   },
   {
@@ -89,7 +89,7 @@ export const mockTodos: Todo[] = [
     useTime: true,
     dueDate: '2025-04-24T14:00:00',
     timeMode: 'time',
-    repeat: false,
+    repeat: 'once',
     completed: false,
   },
 ];
