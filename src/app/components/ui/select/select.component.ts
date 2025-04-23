@@ -1,9 +1,10 @@
 import { Component, computed, input, output, signal } from '@angular/core';
-import { ChevronRight, LucideAngularModule } from 'lucide-angular';
+import { ChevronRight, Circle, LucideAngularModule } from 'lucide-angular';
 
 export interface SelectOption {
   id: string;
   label: string;
+  color?: string;
 }
 
 @Component({
@@ -17,13 +18,18 @@ export class SelectComponent {
   options = input<SelectOption[]>([]);
   selected = input();
   disabled = input<boolean>(false);
+  showCircle = input<boolean>(false);
 
   isDropDownOpen = signal<boolean>(false);
 
   readonly ChevronRight = ChevronRight;
+  readonly Circle = Circle;
 
   selectedLabel = computed(
     () => this.options().find((option) => option.id === this.selected())?.label
+  );
+  selectedColor = computed(
+    () => this.options().find((option) => option.id === this.selected())?.color
   );
 
   onSelect = output<SelectOption>();

@@ -4,11 +4,20 @@
   (click)="toggleOpen()"
 >
   <div class="flex justify-between">
-    @if (selectedLabel()) {
-    <p>{{ selectedLabel() }}</p>
-    } @else {
-    <p class="text-[#A3A3A3]">{{ placeholder() }}</p>
-    }
+    <div class="flex gap-2 items-center">
+      @if (showCircle()) {
+      <lucide-angular
+        [img]="Circle"
+        size="16"
+        strokeWidth="3"
+        [class]="selectedColor() ? selectedColor() : ''"
+      />
+      } @if (selectedLabel()) {
+      <p>{{ selectedLabel() }}</p>
+      } @else {
+      <p class="text-[#A3A3A3]">{{ placeholder() }}</p>
+      }
+    </div>
     <lucide-angular [img]="ChevronRight" />
   </div>
 

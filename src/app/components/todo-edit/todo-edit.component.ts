@@ -61,14 +61,27 @@ export class TodoEditComponent implements OnInit {
     {
       id: 'high',
       label: 'High',
+      color: 'fill-[#fca5a5]',
+    },
+    {
+      id: 'highToMedium',
+      label: 'High to medium',
+      color: 'fill-[#fdba74]',
     },
     {
       id: 'medium',
       label: 'Medium',
+      color: 'fill-[#fde68a]',
+    },
+    {
+      id: 'mediumToLow',
+      label: 'Medium to low',
+      color: 'fill-[#a5f3fc]',
     },
     {
       id: 'low',
       label: 'Low',
+      color: 'fill-[#bbf7d0]',
     },
   ];
 

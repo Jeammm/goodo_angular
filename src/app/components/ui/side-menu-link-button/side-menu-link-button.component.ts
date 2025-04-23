@@ -20,9 +20,5 @@ export class SideMenuLinkButtonComponent {
   icon = input<LucideIconData>();
   dotColor = input<string>();
 
-  dotFill = computed(() => {
-    return this.dotColor() ? `fill-[${this.dotColor()}]` : ``;
-  });
-
   readonly Circle = Circle;
 }
