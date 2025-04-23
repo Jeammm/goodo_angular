@@ -2,8 +2,11 @@
   (click)="tagClickHandler()"
   class="flex gap-2 border rounded-3xl bg-[#EDEDED] border-[#CCCCCC] px-4 py-0.5 text-[#707070]"
 >
-  <span>{{ text() }}</span>
+  <span class="max-w-[300px] truncate">{{ text() }}</span>
   @if (clickable()) {
-  <lucide-angular [img]="X" />
+  <lucide-angular
+    [img]="X"
+    class="cursor-pointer hover:scale-110 transition-all ease"
+  />
   }
 </div>

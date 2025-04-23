@@ -44,17 +44,17 @@
       </textarea>
     </div>
 
-    <div class="flex gap-3 my-2 items-center">
-      <p class="text-[#515153]">Tags:</p>
-      <div class="flex gap-2">
-        @for (tag of todoData.tags; track $index) {
-        <app-tag [text]="tag" />
-        }
-      </div>
+    <div class="my-3">
+      <p class="text-[#515153] mb-1">Tags</p>
+      <app-tag-input
+        (ontagSaved)="onTagSave($event)"
+        (onTagRemove)="onTagRemove($event)"
+        [currentTags]="todoData.tags"
+        class="bg-red-500 flex-1"
+      />
     </div>
 
-    <div class="flex gap-3 my-2 items-center">
-      <p class="text-[#515153]">Priority:</p>
+    <div class="flex gap-3 my-3 items-center">
       <app-select
         class="flex-1"
         [options]="priorityOption"

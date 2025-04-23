@@ -13,6 +13,7 @@ import {
   ButtonGroupOption,
 } from '../ui/button-group/button-group.component';
 import { TodoService } from '../../services/todo.service';
+import { TagInputComponent } from '../tag-input/tag-input.component';
 
 @Component({
   selector: 'app-todo-edit',
@@ -20,12 +21,11 @@ import { TodoService } from '../../services/todo.service';
     FormsModule,
     RouterModule,
     LucideAngularModule,
-    TagComponent,
-    DatePipe,
     SelectComponent,
     DatePickerComponent,
     TimePickerComponent,
     ButtonGroupComponent,
+    TagInputComponent,
   ],
   templateUrl: './todo-edit.component.html',
   styles: ``,
@@ -112,6 +112,14 @@ export class TodoEditComponent implements OnInit {
 
   onToggleFavourite() {
     this.todoData.favourite = !this.todoData.favourite;
+  }
+
+  onTagSave(tag: string) {
+    this.todoData.tags.push(tag);
+  }
+
+  onTagRemove(tag: string) {
+    this.todoData.tags = this.todoData.tags.filter((t) => t !== tag);
   }
 
   onClickCancel() {}

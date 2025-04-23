@@ -1,0 +1,20 @@
+<div class="bg-white border rounded-lg w-full p-2">
+  @if (currentTags().length) {
+  <div class="flex gap-2 mb-2 flex-wrap">
+    @for (tag of currentTags(); track $index) {
+    <app-tag
+      [text]="tag"
+      (onTagClick)="onTagRemove.emit(tag)"
+      [clickable]="true"
+    />
+    }
+  </div>
+  }
+  <input
+    type="text"
+    [(ngModel)]="tag"
+    (keydown.enter)="onEnter($event)"
+    placeholder="add your tags..."
+    class="w-full my-1 outline-none placeholder:text-[#A3A3A3]"
+  />
+</div>

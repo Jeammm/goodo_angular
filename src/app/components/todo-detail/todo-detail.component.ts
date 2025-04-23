@@ -11,7 +11,7 @@ import {
   X,
 } from 'lucide-angular';
 import { DatePipe } from '@angular/common';
-import { TagComponent } from "../ui/tag/tag.component";
+import { TagComponent } from '../ui/tag/tag.component';
 
 @Component({
   selector: 'app-todo-detail',
