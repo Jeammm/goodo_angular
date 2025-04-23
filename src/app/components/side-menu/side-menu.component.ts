@@ -10,10 +10,16 @@ import {
   Star,
 } from 'lucide-angular';
 import { TodoService } from '../../services/todo.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-side-menu',
-  imports: [RouterModule, PrimaryButtonComponent, SideMenuLinkButtonComponent],
+  imports: [
+    RouterModule,
+    PrimaryButtonComponent,
+    SideMenuLinkButtonComponent,
+    NgClass,
+  ],
   templateUrl: './side-menu.component.html',
   styles: ``,
 })
@@ -24,5 +30,5 @@ export class SideMenuComponent {
   readonly Checked = CheckSquare;
   readonly Settings = Settings;
 
-  todoService = inject(TodoService)
+  todoService = inject(TodoService);
 }

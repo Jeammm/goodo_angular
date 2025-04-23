@@ -1,6 +1,6 @@
 <a [routerLink]="linkTo()" [queryParams]="query()">
   <button
-    class="w-full py-2 px-3.5 text-[#707070] cursor-pointer rounded-lg text-start justify-center hover:bg-[#EBEBEB] flex gap-2 items-center"
+    class="w-full py-2 px-3.5 text-[#707070] cursor-pointer rounded-lg text-start justify-center hover:bg-[#EBEBEB] flex gap-2 items-center transition-all duration-300 ease-in-out"
     routerLinkActive="text-black bg-[#EBEBEB]"
   >
     @if (icon()) {
@@ -13,8 +13,17 @@
       class="my-0.5 px-[1px]"
       [class]="dotColor()"
     />
-    } @if (linkText()) {
-    <p class="flex-1">{{ linkText() }}</p>
     }
+
+    <p
+      class="flex-1 whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out"
+      [ngStyle]="{
+        opacity: collapsed() ? 0 : 1,
+        width: collapsed() ? '0px' : 'auto',
+        marginLeft: collapsed() ? '0px' : '4px'
+      }"
+    >
+      {{ linkText() }}
+    </p>
   </button>
 </a>

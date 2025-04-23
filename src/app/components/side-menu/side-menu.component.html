@@ -1,94 +1,99 @@
-@if (!todoService.menuCollapsed()) {
-<div class="bg-[#F4F4F4] rounded-2xl px-[25px] pt-[32px] pb-[25px]">
-  <h3 class="text-4xl mb-6 text-[#515153]">Menu</h3>
+<div
+  class="bg-[#F4F4F4] rounded-2xl transition-all duration-300 ease-in-out overflow-hidden pt-[32px] pb-[25px]"
+  [ngClass]="{
+    'w-[374px] px-[25px] ': !todoService.menuCollapsed(),
+    'w-[80px] px-4 ': todoService.menuCollapsed()
+  }"
+>
+  <!-- Header -->
+  <h3
+    class="text-4xl mb-6 text-[#515153] transition-opacity duration-200"
+    [ngClass]="{
+      'opacity-100': !todoService.menuCollapsed(),
+      'opacity-0': todoService.menuCollapsed()
+    }"
+  >
+    Menu
+  </h3>
+
+  <!-- Add New Todo Button -->
   <a routerLink="/todo/active/new">
-    <app-primary-button btnText="+ Add a new todo" />
+    <app-primary-button
+      [btnText]="todoService.menuCollapsed() ? '+' : '+ Add a new todo'"
+    />
   </a>
+
+  <!-- Main Links -->
   <div class="flex flex-col gap-1.5 mt-5.5">
     <app-side-menu-link-button
       linkTo="/todo/active"
       linkText="Active list"
       [icon]="ListCheck"
+      [collapsed]="todoService.menuCollapsed()"
     />
     <app-side-menu-link-button
       linkTo="/todo/soon"
       linkText="Due soon"
       [icon]="Glasshour"
+      [collapsed]="todoService.menuCollapsed()"
     />
     <app-side-menu-link-button
       linkTo="/todo/important"
       linkText="Important"
       [icon]="Star"
+      [collapsed]="todoService.menuCollapsed()"
     />
     <app-side-menu-link-button
       linkTo="/todo/completed"
       linkText="Completed"
       [icon]="Checked"
+      [collapsed]="todoService.menuCollapsed()"
     />
   </div>
 
+  <!-- Divider -->
   <div class="border-b mx-2 mt-5 mb-4.5"></div>
 
-  <p class="text-[#707070] mx-2 mb-3 text-sm">Categories</p>
+  <!-- Categories Label -->
+  <p
+    class="text-[#707070] mx-2 mb-3 text-sm transition-opacity duration-200"
+    [ngClass]="{
+      'opacity-100': !todoService.menuCollapsed(),
+      'opacity-0': todoService.menuCollapsed()
+    }"
+  >
+    Categories
+  </p>
+
+  <!-- Tag Buttons -->
   <div class="flex flex-col gap-1.5">
     <app-side-menu-link-button
       [query]="{ tag: 'ske-head-work' }"
       linkText="SKE head work"
       dotColor="fill-[#70CA88]"
+      [collapsed]="todoService.menuCollapsed()"
     />
     <app-side-menu-link-button
       [query]="{ tag: 'cpsk-work' }"
       linkText="CPSK work"
       dotColor="fill-[#ECCD72]"
+      [collapsed]="todoService.menuCollapsed()"
     />
     <app-side-menu-link-button
       [query]="{ tag: 'gdsc-work' }"
       linkText="GDSC work"
       dotColor="fill-[#EA6C64]"
+      [collapsed]="todoService.menuCollapsed()"
     />
   </div>
 
+  <!-- Settings -->
   <div class="mt-6">
     <app-side-menu-link-button
       linkTo="/setting"
       linkText="Setting"
       [icon]="Settings"
+      [collapsed]="todoService.menuCollapsed()"
     />
   </div>
 </div>
-} @else {
-<div class="bg-[#F4F4F4] rounded-2xl px-[25px] pt-[32px] pb-[25px]">
-  <h3 class="text-4xl mb-6 text-[#515153]">‎</h3>
-  <a routerLink="/todo/active/new">
-    <app-primary-button btnText="+" />
-  </a>
-  <div class="flex flex-col gap-1.5 mt-5.5">
-    <app-side-menu-link-button linkTo="/todo/active" [icon]="ListCheck" />
-    <app-side-menu-link-button linkTo="/todo/soon" [icon]="Glasshour" />
-    <app-side-menu-link-button linkTo="/todo/important" [icon]="Star" />
-    <app-side-menu-link-button linkTo="/todo/completed" [icon]="Checked" />
-  </div>
-
-  <div class="border-b mx-2 mt-5 mb-4.5"></div>
-
-  <p class="text-[#707070] mx-2 mb-3 text-sm">‎</p>
-  <div class="flex flex-col gap-1.5">
-    <app-side-menu-link-button
-      [query]="{ tag: 'ske-head-work' }"
-      dotColor="fill-[#70CA88]"
-    />
-    <app-side-menu-link-button
-      [query]="{ tag: 'cpsk-work' }"
-      dotColor="fill-[#ECCD72]"
-    />
-    <app-side-menu-link-button
-      [query]="{ tag: 'gdsc-work' }"
-      dotColor="fill-[#EA6C64]"
-    />
-  </div>
-
-  <div class="mt-6">
-    <app-side-menu-link-button linkTo="/setting" [icon]="Settings" />
-  </div>
-</div>
-}

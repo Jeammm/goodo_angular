@@ -1,15 +1,11 @@
-import { Component, computed, input } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
-import {
-  Check,
-  Circle,
-  LucideAngularModule,
-  LucideIconData,
-} from 'lucide-angular';
+import { NgStyle } from '@angular/common';
+import { Component, input } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Circle, LucideAngularModule, LucideIconData } from 'lucide-angular';
 
 @Component({
   selector: 'app-side-menu-link-button',
-  imports: [RouterLink, RouterLinkActive, LucideAngularModule],
+  imports: [RouterLink, RouterLinkActive, LucideAngularModule, NgStyle],
   templateUrl: './side-menu-link-button.component.html',
   styles: ``,
 })
@@ -19,6 +15,7 @@ export class SideMenuLinkButtonComponent {
   linkText = input<string>('');
   icon = input<LucideIconData>();
   dotColor = input<string>();
+  collapsed = input<boolean>(false);
 
   readonly Circle = Circle;
 }
