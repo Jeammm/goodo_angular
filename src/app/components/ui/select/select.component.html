@@ -27,7 +27,7 @@
     (click)="$event.stopPropagation(); toggleOpen()"
   ></div>
   <div
-    class="z-100 absolute w-full translate-y-2 -translate-x-2 bg-white border border-[#E4E4E4] rounded-b-lg p-2 cursor-pointer"
+    class="animate-dropdown-fade-in z-100 absolute w-full translate-y-2 -translate-x-2 bg-white border border-[#E4E4E4] rounded-b-lg p-2 cursor-pointer"
   >
     @for (option of options(); track option.id) {
     <div (click)="onOptionClick(option)" class="px-2 py-1 hover:bg-[#efefef]">
