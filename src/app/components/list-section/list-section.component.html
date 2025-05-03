@@ -1,15 +1,14 @@
 <div class="ml-5 flex h-full">
-  <div class="flex-1">
+  <div class="flex-1 grid grid-rows-[auto_1fr]">
     <h3 class="text-3xl text-[#515153] pl-7 py-6">
       {{ sectionType() | titlecase }} list
     </h3>
-    <div class="flex flex-col gap-2.5">
+    <div class="flex flex-col gap-2.5 overflow-scroll">
       @for (todo of filteredTodoList(); track todo.id) {
       <app-todo-item [todo]="todo" />
       }
     </div>
     @if (shouldShowBackdrop()) {
-
     <div
       class="lg:hidden absolute -top-5 -left-5 w-screen h-screen backdrop-blur-sm"
     ></div>
