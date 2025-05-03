@@ -1,28 +1,29 @@
-<nav class="flex items-center pt-7 pr-8 pl-13">
+<nav class="flex items-center pt-4 pr-8 pl-13">
   <button class="cursor-pointer" (click)="onToggleMenuCollapse()">
-    <lucide-angular [img]="MenuIcon" size="40" />
+    <lucide-angular [img]="MenuIcon" size="30" />
   </button>
 
-  <div class="flex items-center gap-2 ml-5 mr-12.5">
+  <div class="flex items-center gap-2 ml-5 mr-5">
     <img
       src="assets/images/logo.png"
       alt="goodo logo"
-      class="h-[75px] w-[77px]"
+      class="h-[45px] w-[47px]"
     />
-    <span class="text-5xl text-[#515153]">Goodo</span>
+    <span class="text-3xl text-[#515153] hidden lg:block">Goodo</span>
   </div>
 
   <div
     class="flex-1 items-center flex border border-[#F6F6F6] hover:bg-[#efefef] rounded-[40px] px-[27px] gap-4 shadow-md bg-[#F8F8F8]"
   >
-    <label for="search-todo"><lucide-angular [img]="Search" size="33" /></label>
+    <label for="search-todo"><lucide-angular [img]="Search" size="23" /></label>
     <input
       id="search-todo"
       type="text"
       placeholder="Search todo"
       [(ngModel)]="searchQuery"
       (ngModelChange)="handleSearch(searchQuery)"
-      class="outline-none py-4 w-full placeholder:text-[#707070] text-lg"
+      class="outline-none py-2.5 w-full placeholder:text-[#707070]"
+      autoComplete="off"
     />
   </div>
 

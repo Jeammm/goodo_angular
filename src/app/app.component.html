@@ -1,9 +1,11 @@
-<app-header />
-<main class="p-6">
-  <div class="flex">
-    <app-side-menu />
-    <div class="flex-1">
-      <router-outlet />
+<div class="grid grid-rows-[auto_1fr] h-screen">
+  <app-header />
+  <main class="p-6 h-full overflow-hidden">
+    <div class="flex relative h-full">
+      <app-side-menu />
+      <div class="flex-1">
+        <router-outlet />
+      </div>
     </div>
-  </div>
-</main>
+  </main>
+</div>

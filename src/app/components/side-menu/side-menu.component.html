@@ -1,99 +1,107 @@
 <div
-  class="bg-[#F4F4F4] rounded-2xl transition-all duration-300 ease-in-out overflow-hidden pt-[32px] pb-[25px]"
+  class="bg-[#F4F4F4] rounded-2xl transition-all duration-300 ease-in-out overflow-hidden pt-6 pb-[25px] h-full"
   [ngClass]="{
-    'w-[374px] px-[25px] ': !todoService.menuCollapsed(),
-    'w-[80px] px-4 ': todoService.menuCollapsed()
+    'w-[280px] lg:w-[374px]': !todoService.menuCollapsed(),
+    'w-[80px]': todoService.menuCollapsed()
   }"
 >
   <!-- Header -->
   <h3
-    class="text-4xl mb-6 text-[#515153] transition-opacity duration-200"
+    class="text-3xl mb-5 text-[#515153] transition-opacity duration-200"
     [ngClass]="{
-      'opacity-100': !todoService.menuCollapsed(),
-      'opacity-0': todoService.menuCollapsed()
+      'px-[25px] opacity-100': !todoService.menuCollapsed(),
+      'px-4 opacity-0': todoService.menuCollapsed()
     }"
   >
     Menu
   </h3>
 
-  <!-- Add New Todo Button -->
-  <a routerLink="/todo/active/new">
-    <app-primary-button
-      [btnText]="todoService.menuCollapsed() ? '+' : '+ Add a new todo'"
-    />
-  </a>
-
-  <!-- Main Links -->
-  <div class="flex flex-col gap-1.5 mt-5.5">
-    <app-side-menu-link-button
-      linkTo="/todo/active"
-      linkText="Active list"
-      [icon]="ListCheck"
-      [collapsed]="todoService.menuCollapsed()"
-    />
-    <app-side-menu-link-button
-      linkTo="/todo/soon"
-      linkText="Due soon"
-      [icon]="Glasshour"
-      [collapsed]="todoService.menuCollapsed()"
-    />
-    <app-side-menu-link-button
-      linkTo="/todo/important"
-      linkText="Important"
-      [icon]="Star"
-      [collapsed]="todoService.menuCollapsed()"
-    />
-    <app-side-menu-link-button
-      linkTo="/todo/completed"
-      linkText="Completed"
-      [icon]="Checked"
-      [collapsed]="todoService.menuCollapsed()"
-    />
-  </div>
-
-  <!-- Divider -->
-  <div class="border-b mx-2 mt-5 mb-4.5"></div>
-
-  <!-- Categories Label -->
-  <p
-    class="text-[#707070] mx-2 mb-3 text-sm transition-opacity duration-200"
+  <div
+    class="overflow-scroll h-full"
     [ngClass]="{
-      'opacity-100': !todoService.menuCollapsed(),
-      'opacity-0': todoService.menuCollapsed()
+      'px-[25px]': !todoService.menuCollapsed(),
+      'px-5': todoService.menuCollapsed()
     }"
   >
-    Categories
-  </p>
+    <!-- Add New Todo Button -->
+    <a routerLink="/todo/active/new">
+      <app-primary-button
+        [btnText]="todoService.menuCollapsed() ? '+' : '+ Add a new todo'"
+      />
+    </a>
 
-  <!-- Tag Buttons -->
-  <div class="flex flex-col gap-1.5">
-    <app-side-menu-link-button
-      [query]="{ tag: 'ske-head-work' }"
-      linkText="SKE head work"
-      dotColor="fill-[#70CA88]"
-      [collapsed]="todoService.menuCollapsed()"
-    />
-    <app-side-menu-link-button
-      [query]="{ tag: 'cpsk-work' }"
-      linkText="CPSK work"
-      dotColor="fill-[#ECCD72]"
-      [collapsed]="todoService.menuCollapsed()"
-    />
-    <app-side-menu-link-button
-      [query]="{ tag: 'gdsc-work' }"
-      linkText="GDSC work"
-      dotColor="fill-[#EA6C64]"
-      [collapsed]="todoService.menuCollapsed()"
-    />
-  </div>
+    <!-- Main Links -->
+    <div class="flex flex-col gap-1.5 mt-4">
+      <app-side-menu-link-button
+        linkTo="/todo/active"
+        linkText="Active list"
+        [icon]="ListCheck"
+        [collapsed]="todoService.menuCollapsed()"
+      />
+      <app-side-menu-link-button
+        linkTo="/todo/soon"
+        linkText="Due soon"
+        [icon]="Glasshour"
+        [collapsed]="todoService.menuCollapsed()"
+      />
+      <app-side-menu-link-button
+        linkTo="/todo/important"
+        linkText="Important"
+        [icon]="Star"
+        [collapsed]="todoService.menuCollapsed()"
+      />
+      <app-side-menu-link-button
+        linkTo="/todo/completed"
+        linkText="Completed"
+        [icon]="Checked"
+        [collapsed]="todoService.menuCollapsed()"
+      />
+    </div>
 
-  <!-- Settings -->
-  <div class="mt-6">
-    <app-side-menu-link-button
-      linkTo="/setting"
-      linkText="Setting"
-      [icon]="Settings"
-      [collapsed]="todoService.menuCollapsed()"
-    />
+    <!-- Divider -->
+    <div class="border-b mx-2 mt-5 mb-4.5"></div>
+
+    <!-- Categories Label -->
+    <p
+      class="text-[#707070] mx-2 mb-3 text-sm transition-opacity duration-200"
+      [ngClass]="{
+        'opacity-100': !todoService.menuCollapsed(),
+        'opacity-0': todoService.menuCollapsed()
+      }"
+    >
+      Categories
+    </p>
+
+    <!-- Tag Buttons -->
+    <div class="flex flex-col gap-1.5">
+      <app-side-menu-link-button
+        [query]="{ tag: 'ske-head-work' }"
+        linkText="SKE head work"
+        dotColor="fill-[#70CA88]"
+        [collapsed]="todoService.menuCollapsed()"
+      />
+      <app-side-menu-link-button
+        [query]="{ tag: 'cpsk-work' }"
+        linkText="CPSK work"
+        dotColor="fill-[#ECCD72]"
+        [collapsed]="todoService.menuCollapsed()"
+      />
+      <app-side-menu-link-button
+        [query]="{ tag: 'gdsc-work' }"
+        linkText="GDSC work"
+        dotColor="fill-[#EA6C64]"
+        [collapsed]="todoService.menuCollapsed()"
+      />
+    </div>
+
+    <!-- Settings -->
+    <div class="mt-6">
+      <app-side-menu-link-button
+        linkTo="/setting"
+        linkText="Setting"
+        [icon]="Settings"
+        [collapsed]="todoService.menuCollapsed()"
+      />
+    </div>
   </div>
 </div>

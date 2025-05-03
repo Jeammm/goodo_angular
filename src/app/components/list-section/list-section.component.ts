@@ -60,4 +60,16 @@ export class ListSectionComponent implements OnInit {
         return;
     }
   }
+
+  shouldShowBackdrop(): boolean {
+    const child = this.route.firstChild;
+    const childPath = child?.snapshot.routeConfig?.path;
+
+    // Return true for 'new', ':todoId', or ':todoId/edit'
+    return (
+      childPath === 'new' ||
+      childPath === ':todoId' ||
+      childPath === ':todoId/edit'
+    );
+  }
 }
