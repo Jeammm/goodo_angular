@@ -48,7 +48,7 @@ export class TodoEditComponent implements OnInit {
       this.todoId = params.get('todoId');
 
       if (this.todoId !== null) {
-        this.todoService.getTodoById(Number(this.todoId)).subscribe((res) => {
+        this.todoService.getTodoById(this.todoId).subscribe((res) => {
           if (res) {
             this.todoData = res;
           }
@@ -59,53 +59,49 @@ export class TodoEditComponent implements OnInit {
 
   readonly priorityOption: SelectOption[] = [
     {
-      id: 'high',
+      id: '0',
       label: 'High',
       color: 'fill-[#fca5a5]',
     },
     {
-      id: 'highToMedium',
+      id: '1',
       label: 'High to medium',
       color: 'fill-[#fdba74]',
     },
     {
-      id: 'medium',
+      id: '2',
       label: 'Medium',
       color: 'fill-[#fde68a]',
     },
     {
-      id: 'mediumToLow',
+      id: '3',
       label: 'Medium to low',
       color: 'fill-[#a5f3fc]',
     },
     {
-      id: 'low',
+      id: '4',
       label: 'Low',
       color: 'fill-[#bbf7d0]',
     },
   ];
 
   onSelectPriority(priority: SelectOption) {
-    this.todoData.priority = priority.id;
+    this.todoData.priority = +priority.id;
   }
 
   readonly repeatOption: SelectOption[] = [
     {
-      id: 'no-repeat',
+      id: '0',
       label: "Don't repeat",
     },
     {
-      id: 'once',
-      label: 'Only once',
-    },
-    {
-      id: 'always',
-      label: 'Always repeat',
+      id: '1',
+      label: 'Repeat',
     },
   ];
 
   onSelectRepeat(repeat: SelectOption) {
-    this.todoData.repeat = repeat.id;
+    this.todoData.isRepeating = Boolean(+repeat.id);
   }
 
   readonly timeModeOptions: ButtonGroupOption[] = [
@@ -123,19 +119,27 @@ export class TodoEditComponent implements OnInit {
     this.todoData.timeMode = mode.id;
   }
 
-  onToggleFavourite() {
-    this.todoData.favourite = !this.todoData.favourite;
+  onToggleFavorite() {
+    this.todoData.isFavorite = !this.todoData.isFavorite;
   }
 
   onTagSave(tag: string) {
-    this.todoData.tags.push(tag);
+    this.todoData.tag.push(tag);
   }
 
   onTagRemove(tag: string) {
-    this.todoData.tags = this.todoData.tags.filter((t) => t !== tag);
+    this.todoData.tag = this.todoData.tag.filter((t) => t !== tag);
   }
 
   onClickCancel() {}
 
-  onClickSave() {}
+  onClickSave() {
+    this.todoService
+      .updateTodo(this.todoId!, this.todoData)
+      .subscribe((res) => {
+        if (res) {
+          this.todoData = res;
+        }
+      });
+  }
 }

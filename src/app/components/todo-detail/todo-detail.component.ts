@@ -38,7 +38,7 @@ export class TodoDetailComponent implements OnInit {
       this.todoId = params.get('todoId');
 
       if (this.todoId !== null) {
-        this.todoService.getTodoById(Number(this.todoId)).subscribe((res) => {
+        this.todoService.getTodoById(this.todoId).subscribe((res) => {
           if (res) {
             this.todoData.set(res);
           }
@@ -50,7 +50,7 @@ export class TodoDetailComponent implements OnInit {
   onClickComplete() {
     this.todoService.toggleTodoCompletedById(
       this.todoData().id,
-      !this.todoData().completed
+      !this.todoData().isDone
     );
   }
 

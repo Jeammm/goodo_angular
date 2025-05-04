@@ -7,15 +7,15 @@
   <input
     type="checkbox"
     class="scale-150 accent-[#E54E45]"
-    [checked]="todo().completed"
+    [checked]="todo().isDone"
     onclick="return false;"
   />
   <lucide-angular
     [img]="Star"
     class="mx-2.5"
-    [class]="todo().favourite ? 'fill-yellow-500' : ''"
+    [class]="todo().isFavorite ? 'fill-yellow-500' : ''"
   />
-  <p class="line-clamp-1">{{ todo().name }}</p>
+  <p class="line-clamp-1">{{ todo().title }}</p>
 
   @if (todoService.menuCollapsed()) {
   <lucide-angular

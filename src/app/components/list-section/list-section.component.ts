@@ -20,12 +20,12 @@ export class ListSectionComponent implements OnInit {
   filteredTodoList = computed(() =>
     this.todoList().filter((t) => {
       return (
-        t.name
+        t.title
           .toLowerCase()
-          .includes(this.todoService.search().toLowerCase()) ||
+          .includes(this.todoService.search()?.toLowerCase()) ||
         t.description
           .toLowerCase()
-          .includes(this.todoService.search().toLowerCase())
+          .includes(this.todoService.search()?.toLowerCase())
       );
     })
   );
