@@ -36,15 +36,14 @@
     <div class="overflow-scroll mt-1">
       <div class="my-2 py-3">
         <p class="text-[#515153] mb-1">Description:</p>
-        <textarea
-          type="text"
-          #description="ngModel"
-          placeholder="write your description..."
-          class="outline-none p-3 w-full bg-white border border-[#E4E4E4] rounded-lg resize-none h-[140px]"
-          [(ngModel)]="todoData.description"
-          name="description"
+        <quill-editor
+          class="bg-white border border-[#E4E4E4] rounded-lg w-full outline-none"
+          theme="snow"
+          (onEditorCreated)="onQuillInstantCreated($event)"
+          (onContentChanged)="onDescriptionChange($event)"
+          [style]="'height: 140px;'"
         >
-        </textarea>
+        </quill-editor>
       </div>
 
       <div class="my-3">

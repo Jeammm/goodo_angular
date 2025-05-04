@@ -13,12 +13,18 @@ import {
 } from 'lucide-angular';
 import { DatePipe } from '@angular/common';
 import { TagComponent } from '../ui/tag/tag.component';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-todo-detail',
-  imports: [LucideAngularModule, RouterModule, DatePipe, TagComponent],
+  imports: [
+    LucideAngularModule,
+    RouterModule,
+    DatePipe,
+    TagComponent,
+    QuillModule,
+  ],
   templateUrl: './todo-detail.component.html',
-  styles: ``,
 })
 export class TodoDetailComponent implements OnInit {
   todoService = inject(TodoService);

@@ -28,9 +28,10 @@
   <div class="overflow-scroll">
     <div class="my-2 py-3">
       <p class="text-[#515153] mb-1">Description:</p>
-      <p>
-        {{ todoData().description }}
-      </p>
+      <quill-view-html
+        [content]="todoData().description"
+        theme="snow"
+      ></quill-view-html>
     </div>
 
     <div class="flex gap-3 my-2 items-center">

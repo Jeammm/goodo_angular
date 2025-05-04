@@ -1,6 +1,7 @@
+import { QuillModule } from 'ngx-quill';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Todo } from '../../model/class/todo';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule, Save, Star, X, XCircle } from 'lucide-angular';
 import { TagComponent } from '../ui/tag/tag.component';
 import { DatePipe } from '@angular/common';
@@ -14,6 +15,7 @@ import {
 } from '../ui/button-group/button-group.component';
 import { TodoService } from '../../services/todo.service';
 import { TagInputComponent } from '../tag-input/tag-input.component';
+import Quill from 'quill';
 
 @Component({
   selector: 'app-todo-edit',
@@ -26,9 +28,9 @@ import { TagInputComponent } from '../tag-input/tag-input.component';
     TimePickerComponent,
     ButtonGroupComponent,
     TagInputComponent,
+    QuillModule,
   ],
   templateUrl: './todo-edit.component.html',
-  styles: ``,
 })
 export class TodoEditComponent implements OnInit {
   todoService = inject(TodoService);
@@ -41,7 +43,7 @@ export class TodoEditComponent implements OnInit {
   readonly Save = Save;
   readonly Cancel = XCircle;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -51,6 +53,7 @@ export class TodoEditComponent implements OnInit {
         this.todoService.getTodoById(this.todoId).subscribe((res) => {
           if (res) {
             this.todoData = res;
+            this.trySetEditorContent();
           }
         });
       }
@@ -133,14 +136,42 @@ export class TodoEditComponent implements OnInit {
 
   onClickCancel() {}
 
+  goToDetail() {
+    const currentUrl = this.router.url;
+    const targetUrl = currentUrl.replace('/edit', '');
+    this.router.navigateByUrl(targetUrl);
+  }
+
   onClickSave() {
     this.todoService
-      .updateTodo(this.todoId!, this.todoData)
+      .updateTodo(this.todoId!, {
+        ...this.todoData,
+      })
       .subscribe((res) => {
         if (res) {
           this.todoData = res;
           this.todoService.reloadSignal.update((v) => v + 1);
+          this.goToDetail();
         }
       });
+  }
+
+  onDescriptionChange(change: any) {
+    this.todoData.description = change.html;
+  }
+
+  editor: Quill | null = null;
+  onQuillInstantCreated(editor: Quill) {
+    this.editor = editor;
+    this.trySetEditorContent();
+  }
+
+  trySetEditorContent() {
+    if (this.editor && this.todoData?.description) {
+      const delta = this.editor.clipboard.convert({
+        html: this.todoData.description,
+      });
+      this.editor.setContents(delta, 'silent');
+    }
   }
 }
