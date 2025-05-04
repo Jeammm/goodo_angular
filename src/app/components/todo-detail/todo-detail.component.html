@@ -73,8 +73,13 @@
       class="flex flex-col items-center gap-2 cursor-pointer hover:bg-[#e6e6e6] py-2 flex-1/2 rounded-md"
       (click)="onClickComplete()"
     >
+      @if (todoData().isDone) {
+      <lucide-angular [img]="Uncheck" size="30" [strokeWidth]="1.5" />
+      <span>Uncomplete</span>
+      } @else {
       <lucide-angular [img]="Check" size="30" [strokeWidth]="1.5" />
       <span>Complete</span>
+      }
     </button>
     <button
       class="flex flex-col items-center gap-2 cursor-pointer hover:bg-[#e6e6e6] py-2 flex-1/2 rounded-md"

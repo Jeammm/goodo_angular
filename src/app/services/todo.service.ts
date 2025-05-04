@@ -15,6 +15,7 @@ export class TodoService {
   search = signal<string>('');
   sort = signal<string>('priority');
   order = signal<string>('desc');
+  reloadSignal = signal(0);
 
   onChangeSearch(q: string) {
     this.search.set(q);

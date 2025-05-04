@@ -1,6 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, output, signal } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Todo } from '../../model/class/todo';
 import {
   Check,
@@ -8,6 +8,7 @@ import {
   LucideAngularModule,
   Star,
   Trash2,
+  Undo2,
   X,
 } from 'lucide-angular';
 import { DatePipe } from '@angular/common';
@@ -26,12 +27,13 @@ export class TodoDetailComponent implements OnInit {
   todoData = signal<Todo>(new Todo());
 
   readonly Check = Check;
+  readonly Uncheck = Undo2;
   readonly Edit = FileEdit;
   readonly Delete = Trash2;
   readonly Star = Star;
   readonly X = X;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -48,13 +50,29 @@ export class TodoDetailComponent implements OnInit {
   }
 
   onClickComplete() {
-    this.todoService.toggleTodoCompletedById(
-      this.todoData().id,
-      !this.todoData().isDone
-    );
+    this.todoData().isDone = !this.todoData().isDone;
+    this.todoService
+      .toggleTodoCompletedById(this.todoData().id, this.todoData().isDone)
+      .subscribe({
+        next: (res) => {
+          this.todoService.reloadSignal.update((v) => v + 1);
+        },
+        error: (err) => {
+          console.error('Delete failed:', err);
+          this.todoData().isDone = !this.todoData().isDone;
+        },
+      });
   }
 
   onClickDelete() {
-    this.todoService.deleteTodoById(this.todoData().id);
+    this.todoService.deleteTodoById(this.todoData().id).subscribe({
+      next: (res) => {
+        this.todoService.reloadSignal.update((v) => v + 1);
+        this.router.navigate(['../']);
+      },
+      error: (err) => {
+        console.error('Delete failed:', err);
+      },
+    });
   }
 }
