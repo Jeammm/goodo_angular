@@ -139,6 +139,7 @@ export class TodoEditComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.todoData = res;
+          this.todoService.reloadSignal.update((v) => v + 1);
         }
       });
   }
