@@ -29,7 +29,11 @@ export const routes: Routes = [
         loadComponent: () => ListSectionComponent,
         data: { sectionType: type },
         children: [
-          { path: 'new', loadComponent: () => TodoEditComponent },
+          {
+            path: 'new',
+            loadComponent: () => TodoEditComponent,
+            data: { isNew: true },
+          },
           { path: ':todoId', loadComponent: () => TodoDetailComponent },
           { path: ':todoId/edit', loadComponent: () => TodoEditComponent },
         ],

@@ -43,7 +43,13 @@ export class TodoEditComponent implements OnInit {
   readonly Save = Save;
   readonly Cancel = XCircle;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  isNew = signal<boolean>(false);
+
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.route.data.subscribe((data) => {
+      this.isNew.set(data['isNew']);
+    });
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -109,11 +115,11 @@ export class TodoEditComponent implements OnInit {
 
   readonly timeModeOptions: ButtonGroupOption[] = [
     {
-      id: 'all-day',
+      id: 'ALL_DAY',
       label: 'All day',
     },
     {
-      id: 'time',
+      id: 'SOME_TIME',
       label: 'Time',
     },
   ];
@@ -142,18 +148,33 @@ export class TodoEditComponent implements OnInit {
     this.router.navigateByUrl(targetUrl);
   }
 
+  goToNewTodo(id: string) {
+    const currentUrl = this.router.url;
+    const targetUrl = currentUrl.replace('new', id);
+    console.log('qweqw');
+    this.router.navigateByUrl(targetUrl);
+  }
+
   onClickSave() {
-    this.todoService
-      .updateTodo(this.todoId!, {
-        ...this.todoData,
-      })
-      .subscribe((res) => {
+    if (this.isNew()) {
+      this.todoService.createTodo(this.todoData).subscribe((res) => {
         if (res) {
           this.todoData = res;
           this.todoService.reloadSignal.update((v) => v + 1);
-          this.goToDetail();
+          this.goToNewTodo(res.id);
         }
       });
+    } else {
+      this.todoService
+        .updateTodo(this.todoId!, this.todoData)
+        .subscribe((res) => {
+          if (res) {
+            this.todoData = res;
+            this.todoService.reloadSignal.update((v) => v + 1);
+            this.goToDetail();
+          }
+        });
+    }
   }
 
   onDescriptionChange(change: any) {

@@ -20,8 +20,8 @@ export class Todo {
     this.tag = [];
     this.priority = 0;
     this.useDueDate = true;
-    this.dueDate = '';
-    this.timeMode = 'all-day';
+    this.dueDate = new Date().toISOString();
+    this.timeMode = 'ALL_DAY';
     this.isRepeating = false;
   }
 }
